@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Cadastro</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Administrador</li>
+        </ol>
+        <div class="row">
+            <div class="form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1 class="title">Cadastrar um Admin</h1>
+
+                <form action="{% url 'registrar_Admin' %}" method="post" enctype="multipart/form-data" class="myform">
+                    {% csrf_token %}
+
+                    {{ form }}
+
+                    <div class="button">
+                        <button id="register">Registrar</button>
+                    </div>
+
+                    <!-- <a href="{% url 'read' %}">Ver usuarios (isso eh so para testar)</a> -->
+                    <!-- <a href="{% url 'register_F' %}">Criar um usuario Fisico</a>
+                    <a href="{% url 'register' %}">Criar um usuario juridico</a>
+                    <a href="{% url 'registrar_G' %}">Criar um usuario Governo</a> -->
+                </form>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+    </div>
+</main>
+{% endblock %}

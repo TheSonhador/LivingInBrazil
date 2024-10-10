@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Pontos Turísticos</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Pontos Turísticos</li>
+        </ol>
+        <div class="row" style="justify-content: center;">
+            {% if user_logado in usuariosA %}
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">Cadastrar ponto turistico</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" method="GET" href="{% url 'registrar_P' %}">Cadastrar</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Pontos turisticos cadastrados
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Descricao</th>
+                            <th scope="col">Fotos</th>
+                            <th scope="col">QRCode</th>
+                            <th scope="col">Coordenadas</th>
+                            <th scope="col">Endereço</th>
+                            <th scope="col">Dono</th>
+                            <th scope="col">Status</th>
+                            {% if user_logado in usuariosA %}
+                                <th class="bg-warning" scope="col">Status</th>
+                            {%endif%}
+                            <th class="bg-warning" scope="col">Editar</th>
+                            <th class="bg-danger" scope="col">Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ponto in pontos %}
+                            {% if ponto.pon_gov_id == user_logado or ponto.pon_jur_id == user_logado or user_logado in usuariosA%}
+                                <tr>
+                                    <td class="text-center" scoper="row">{{ponto.pon_nome}}</td>
+                                    <td>{{ponto.pon_descricao}}</td>
+                                    <td>
+                                        {% for foto_P in fotos %}
+                                            {% if foto_P.gap_pon == ponto %}
+                                                {% if foto_P.gap_foto != '' %}
+                                                    <div class="text-center mx-2 my-3" style="border-bottom: 2px solid black;">
+                                                        <img src="{{foto_P.gap_foto.url}}" alt="Lights" style="width:100%">
+                                                        <a class="small text-danger" href="{% url 'excluir_Foto' foto_P.gap_id  %}"><b>Excluir</b></a>      
+                                                    </div>                        
+                                                {%endif%}
+                                            {%endif%}
+                                        {% endfor %}
+                                    </td>   
+                                    {% if ponto.pon_qrcode != '' %}
+                                    <td><img src="{{ponto.pon_qrcode.url}}" alt="Lights" style="width:100%"></td>
+                                    {%else%}
+                                    <td>Não possui um qrcode ainda</td>
+                                    {%endif%}
+                                    <td><span> Latitude: {{ponto.pon_latitude}}<br> Longitude: {{ponto.pon_longitude}} </span>
+                                    </td>
+                                    {% for endereco in enderecos %}
+                                    {% if ponto.pon_id == endereco.end_pon_id_id %}
+                                    <td>
+                                        <span>
+                                            {{endereco.end_rua}}, {{endereco.end_numero}} - {{endereco.end_bairro}} -
+                                            {{endereco.end_cidade}}
+                                        </span>
+                                    </td>
+                                    {%endif%}
+                                    {% endfor %}
+                                    {% if ponto.pon_gov_id == null %}
+                                        {% if ponto.pon_jur_id == null %}
+                                            <td scoper="row">Sem dono</td>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if ponto.pon_jur_id != null %}
+                                        {% for usuario in usuariosJ %}
+                                            {% if ponto.pon_jur_id == usuario %}
+                                                {% for user in users%}
+                                                    {% if usuario.jur_user == user %}
+                                                        <td scoper="row">{{user.username}}</td>
+                                                    {%endif%}
+                                                {% endfor %}
+                                            {%endif%}
+                                        {% endfor %}
+                                    {%endif%}
+                                    {% if ponto.pon_gov_id != null %}
+                                        {% for usuario in usuariosG %}
+                                            {% if ponto.pon_gov_id == usuario %}
+                                                {% for user in users%}
+                                                    {% if usuario.gov_user == user %}
+                                                        <td scoper="row">{{user.username}}</td>
+                                                    {%endif%}
+                                                {% endfor %}
+                                            {%endif%}
+                                        {% endfor %}
+                                    {%endif%}
+                                    {%if ponto.pon_status == False%}
+                                    <td scoper="row" class="bg-danger">Não foi verificado</td>
+                                    {% else %}
+                                    <td scoper="row" class="bg-success">Foi verificado</td>
+                                    {% endif%}
+                                    {% if user_logado in usuariosA %}
+                                        <td><a class="small text-white" href="{% url 'status_P' ponto.pon_id %}"><b>Trocar</b></a>
+                                        </td>
+                                    {%endif%}
+                                    <td><a class="small text-white" href="{% url 'editar_P' ponto.pon_id  %}"><b>Editar</b></a>
+                                    </td>
+                                    <td><a class="small text-white" href="{% url 'excluir_P' ponto.pon_id %}"><b>Excluir</b></a>
+                                    </td>
+                                {%endif%}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

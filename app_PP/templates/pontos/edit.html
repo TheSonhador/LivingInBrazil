@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Edição</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Ponto Turistico</li>
+        </ol>
+        <div class="row">
+            <div class="form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1 class="mt-4">Edite seu ponto turistico</h1>
+
+                <form action="{% url 'editP' ponto.pon_id %}" enctype="multipart/form-data" method="post"
+                    class="myform">
+                    {% csrf_token %}
+
+                    {{ form }}
+                    {% if user_logado in UsuariosA%}
+                        <div>
+                            <label for="select">Dono:</label>
+                            <select class="form-select" id="select" aria_label="select" name="dono">
+                                {% for user in users %}
+                                    {% for usuario in UsuariosG%}
+                                        {% if usuario.gov_user == user and ponto.pon_gov_id != usuario%}
+                                            <option value = "{{user.username}}">{{user.username}}</td>
+                                        {%endif%}
+
+                                        {% if ponto.pon_gov_id == usuario and usuario.gov_user == user%}
+                                            <option selected value = "{{user.username}}">{{user.username}}</td>
+                                        {%endif%}                                    
+                                    {% endfor %}
+                                    {% for usuario2 in UsuariosJ%}
+                                        {% if usuario2.jur_user == user and ponto.pon_jur_id != usuario2%}
+                                            <option value= "{{user.username}}">{{user.username}}</td>
+                                        {%endif%}
+                                        {% if ponto.pon_jur_id == usuario2 and usuario2.jur_user == user%}
+                                            <option selected value = "{{user.username}}">{{user.username}}</td>
+                                        {%endif%}   
+                                    {% endfor %}                            
+                                {% endfor %}                        
+                            </select>
+                        </div>
+                    {%endif%}
+
+                    <div class="button">
+                        <button id="register">Modificar</button>
+                    </div>
+
+                    <a href="{% url 'home' %}">Voltar</a>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+    </div>
+</main>
+{% endblock %}

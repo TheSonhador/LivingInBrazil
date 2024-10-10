@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Modern Business - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="../../static/app_LIB/imgs/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../../static/app_LIB/css/styles.css" rel="stylesheet" />
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+
+            <!-- Navigation-->
+
+            <nav class="navbar navbar-expand navbar shadow" style="height: 90px;">
+                <div class="container px-5">
+                    <img src="../../static/app_LIB/imgs/living in brazil logo.png" alt="Logo" width="60" height="60" class="d-inline-block align-text-top" style="margin-right: 15px;">
+                    <a class="navbar-brand" href="{% url 'home' %}">Living in Brazil</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'pontos_turisticos' %}">Pontos turisticos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" style="background-color: rgb(124, 207, 255); border-radius: 10px; margin-left: 10px;">Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Page Content-->
+
+            <section class="py-5">
+                <div class="container px-5 my-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center mb-5">
+                                <h1 class="fw-bolder">{{ponto.pon_nome}}</h1>
+                                <p class="lead fw-normal text-muted mb-0">{{ponto.pon_descricao}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% if galeria|length == 0 %}
+                    
+                        <div class="row gx-6">
+                            <div class="col">
+                                <img src="{{galeria.0.gap_foto.url}}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                        </div>
+                    {% elif galeria|length == 1 %}
+                        <div class="row gx-6">
+                            <div class="col">
+                                <img src="{{galeria.0.gap_foto.url}}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                        </div>
+                    {% elif galeria|length == 2 %}
+                        <div class="row gx-6">
+                            <div class="col-6">
+                                <img src="{{ponto.pon_foto.url}}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                            <div class="col-3" style="display: flex; justify-content: space-between; flex-direction: column; align-items: center;"> 
+                                <img src="{{ galeria.0.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                            <div class="col-3" style="display: flex; justify-content: space-between; flex-direction: column; align-items: center;"> 
+                                <img src="{{ galeria.1.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                        </div>
+                    {% elif galeria|length == 3 %}
+                        <div class="row gx-6">
+                            <div class="col-6">
+                                <img src="{{ponto.pon_foto.url}}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                            <div class="col-3" style="display: flex; justify-content: space-between; flex-direction: column; align-items: center;"> 
+                                <img src="{{ galeria.0.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                                <img src="{{ galeria.1.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                            <div class="col-3" style="display: flex; justify-content: space-between; flex-direction: column; align-items: center;"> 
+                                <img src="{{ galeria.2.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                        </div>
+                    {% elif galeria|length == 4 %}
+                        <div class="row gx-6">
+                            <div class="col-6">
+                                <img src="{{ponto.pon_foto.url}}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                            <div class="col-3" style="display: flex; justify-content: space-between; flex-direction: column; align-items: center;"> 
+                                <img src="{{ galeria.0.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                                <img src="{{ galeria.1.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                            <div class="col-3" style="display: flex; justify-content: space-between; flex-direction: column; align-items: center;"> 
+                                <img src="{{ galeria.2.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                                <img src="{{ galeria.3.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                        </div>
+                        {% elif galeria|length >= 5 %}
+                        <div class="row gx-6">
+                            <div class="col-6">
+                                <img src="{{ ponto.pon_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                            <div class="col-3" style="display: flex; justify-content: space-between; flex-direction: column; align-items: center;"> 
+                                <img src="{{ galeria.0.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                                <img src="{{ galeria.1.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                            </div>
+                            <div class="col-3 position-relative">
+                                <img src="{{ galeria.2.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 50%;">
+                                <img src="{{ galeria.3.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 50%;">
+                                <div class="position-absolute bottom-0 end-0">
+                                    <button class="btn btn-primary" onclick="toggleGallery()" style="margin-bottom: 15px; margin-right: 24px;">Ver Todas</button>
+                                </div>
+                            </div>
+                        </div>
+                        {% if galeria|length > 4 %}
+                            <div id="hiddenGallery" class="row gx-6" style="display: none;">
+                                {% for i in galeria|slice:"4:" %}
+
+                                    <div class="col-3" style="display: flex; justify-content: space-between; flex-direction: column; align-items: center; margin-top: 20px;">
+                                        <img src="{{ i.gap_foto.url }}" class="img-fluid img-thumbnail" alt="..." style="width: 100%; height: 100%;">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    <br>
+                    <div class="row gx-5 justify-content-between align-items-center">
+                        <div class="col-lg-6">
+                            <div class="text-light-emphasis mb-5">
+                                <p class="lead fw-normal text-muted" style="text-align: start;">
+                                    Cidade: {{endereco.end_cidade}} <br>
+                                    Bairro: {{endereco.end_bairro}} <br>
+                                    Rua: {{endereco.end_rua}} <br>
+                                    Numero: {{endereco.end_numero}}
+                                </p>
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-6 d-flex justify-content-end align-items-center">
+                            <h4 class="fw-bolder">
+                                Média de Notas:
+                                {% if media_notas %}
+                                    {% for nota in "x"|ljust:media_notas %}
+                                        <i class="bi bi-star-fill"></i>
+                                    {% endfor %}
+                                {% else %}
+                                    Sem Avaliações
+                                {% endif %}
+                            </h4>
+                        </div>
+                    </div>
+                    
+                    <!-- AVALIAÇÕES -->
+
+                    <div class="row gx-5">
+                        {% for ava in avaliacao %}
+                        <div class="col-lg-6">
+                            <div class="position-relative mb-5">
+                                <div class="container" style="width: 600px; max-height: 200px;">
+                                    <div class="row">
+                                        <div class="col">
+                                            <img src="{{ ava.ava_fis_id.fis_foto.url }}" alt="..." style="width: 64px; height: 64px; border-radius: 100%; margin-left: 0px; padding: 0;">
+                                        </div>
+                                        <div class="col-10">
+                                            <h4 class="fw-bolder">
+                                                {% for nota in "x"|ljust:ava.ava_nota %}
+                                                    <i class="bi bi-star-fill"></i>
+                                                {% endfor %}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <div class="row-4">
+                                        <p class="lead fw-normal text-muted" style="margin-top: 10px; color: black;"> {{ava.ava_comentario}} </p>
+                                    </div>
+                                </div>
+                                <div class="container" style="width: 600px; height: 60px;">
+                                    <div class="row">
+                                            <div class="col-6" style="display: inline-block; width: 600px;">
+                                                {% for imagens in galeria_avaliacao %}
+                                                    <img src="{{ imagens.gal_foto.url }}" alt="Imagem da avaliação" style="width: 60px; height: 60px;">
+                                                {% endfor %}
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer-->
+
+        <footer class="bg-dark py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Your Website 2023</div></div>
+                    <div class="col-auto">
+                        <a class="link-light small" href="#!">Privacy</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Terms</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">            
+        </script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+
+        <script>
+                let galleryVisible = false;
+
+                function toggleGallery() {
+                    const hiddenGallery = document.getElementById("hiddenGallery");
+                    galleryVisible = !galleryVisible;
+                    
+                    if (galleryVisible) {
+                        hiddenGallery.style.display = "flex";
+                    } else {
+                        hiddenGallery.style.display = "none";
+                    }
+                }
+        </script>
+    </body>
+</html>

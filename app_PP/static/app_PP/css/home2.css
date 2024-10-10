@@ -1,0 +1,68 @@
+h1.title {
+    padding: 15px 0;
+    margin-left: 25px;
+    font-weight: normal;
+    color: rgb(17, 16, 16)
+}
+
+.form {
+    width: 700px;
+}
+
+.myform {
+    background: #F4F5F7;
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 25px
+}
+
+.myform label {
+    display: block;
+    color: #A8AAC5;
+    font-weight: bold;
+    font-size: .8rem;
+    margin-bottom: 10px;
+}
+
+.myform input {
+    border: 0;
+    outline: 0;
+    height: 50px;
+    background: #FFF;
+    width: 100%;
+    border-radius: 5px;
+    color: #070808;
+    font-weight: 700;
+    font-size: .9rem;
+    text-indent: 15px;
+    border: 2px solid transparent;
+    transition: border 250ms;
+}
+
+.full-width {
+    grid-column: -1 / 1
+}
+
+.button {
+    grid-column: -1 / 1;
+    display: flex;
+    justify-content: center;
+}
+
+.button button {
+    border: 0;
+    outline: 0;
+    width: 120px;
+    height: 50px;
+    border-radius: 50px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: .9rem;
+    cursor: pointer;
+    background: linear-gradient(356deg, rgb(15, 15, 15) 0%, rgb(41, 41, 41) 100%);
+}
+
+.button button:hover {
+    background: rgb(64, 64, 65);
+}
